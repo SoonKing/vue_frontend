@@ -69,7 +69,7 @@ module.exports = {
     // webpack-dev-server的配置
     devServer: {
         open: true, // 服务启动后自动打开浏览器
-        port: 8888, // 服务端口
+        port: 8877, // 服务端口
         contentBase: 'dist' // 开启服务的目录
     }
 
