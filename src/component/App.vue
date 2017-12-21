@@ -1,12 +1,15 @@
 <template>
   <div>
       <app-header></app-header>
+      <router-view></router-view>
+      <app-footer></app-footer>
   </div>
 </template>
 
 <script>
 //导入头部与底部组件
 import HeaderComponent from './frame/Header.vue';
+import FooterComponent from './frame/Footer.vue';
 //导入jq
 import $ from 'jquery';
 
@@ -14,7 +17,8 @@ import $ from 'jquery';
   export default {
     //子組件註冊
     components:{
-      appHeader:HeaderComponent
+      appHeader:HeaderComponent,
+      appFooter:FooterComponent,
     },
     //模板渲染到視圖上的時候執行,這時候才可以操作dom
     mounted(){
