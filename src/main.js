@@ -1,5 +1,6 @@
 //导入vue相关包
 import Vue from 'vue';
+import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
 import Filters from './filter';
@@ -7,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './css/style.css';
 
 //启用vue插件
+Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(ElementUI);
 Vue.use(Filters);
@@ -27,5 +29,22 @@ import router from './router';
 new Vue({
     el: "#app",
     render: c => c(AppComponent),
-    router
+    router,
+    store: new Vuex.Store({
+        state: {
+            shopcartTotal: 0
+        },
+        getters: {
+            //计算购物车总数
+            shopcartTotal(state) {
+                return state.shopcartTotal;
+            }
+        },
+        //
+        mutations: {
+            upShopcartTotal(state, num) {
+                state.shopcartTotal += num;
+            }
+        }
+    })
 })

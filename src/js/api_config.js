@@ -5,10 +5,10 @@ export const domain = 'http://157.122.54.189:9095/';
 // 默认导出整个接口配置
 export default {
     // 账号管理
-    login: `/site/account/login`, // 登陆
-    logout: `/site/account/logout`, // 退出
-    isLogin: `/site/account/islogin`, // 是否已登陆
-    register: `/site/account/register`, // 注册
+    login: `/site/account/login/`, // 登陆
+    logout: `/site/account/logout/`, // 退出
+    isLogin: `/site/account/islogin/`, // 是否已登陆
+    register: `/site/account/register/`, // 注册
     checkuser: `/site/account/checkuser/`, // 用户名是否占用, 需要参数: username
 
     // 非商品数据
@@ -18,8 +18,8 @@ export default {
     pageDetail: ` /site/article/getartdetial/`, // 获取文章详情, 需要参数: tablename/artID
 
     // 商品数据
-    goodsTop: `/site/goods/gettopdata/goods`, // 获取商品顶部数据
-    goodsContent: `/site/goods/getgoodsgroup`, // 获取商品列表数据
+    goodsTop: `/site/goods/gettopdata/goods/`, // 获取商品顶部数据
+    goodsContent: `/site/goods/getgoodsgroup/`, // 获取商品列表数据
     goodsCategoty: `/site/goods/getgoodsbycateid/`, // 获取指定分类商品列表数据, 需要参数: cateID, 需要查询: pageIndex 与 pageSize
     goodsDetail: `/site/goods/getgoodsinfo/`, // 获取商品详情, 需要参数: goodsID
 
