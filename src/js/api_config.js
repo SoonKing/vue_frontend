@@ -1,6 +1,7 @@
 // 导出域名
 // export const domain = 'http://172.16.2.23:9095/';
-export const domain = 'http://157.122.54.189:9095/';
+// export const domain = 'http://157.122.54.189:9095/';
+export const domain = 'http://127.0.0.1:8899/';
 
 // 默认导出整个接口配置
 export default {
@@ -28,7 +29,7 @@ export default {
     commentList: `/site/comment/getbypage/`, // 获取评论, 需要参数: artID, 需要查询: pageIndex 与 pageSize
 
     // 购物车数据
-    shopcarGoods: `/site/comment/getshopcargoods/`, // 获取购物车商品数据, 需要参数: goodsIDS
+    shopcartGoods: `/site/comment/getshopcargoods/`, // 获取购物车商品数据, 需要参数:comment/get goodsIDS
 
     // 订单数据
     orderList: ` /site/validate/order/getgoodslist/`, // 获取订单商品列表数据, 需要参数: goodsIDS

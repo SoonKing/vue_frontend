@@ -27,8 +27,8 @@
         <dd>
           <div class="stock-box">
             <!-- 使用element组件的计数器, -->
-            <el-input-number v-model="goodsCount" @change="handleChange"
-              :min="1" :max="goodsinfo.stock_quantity" size="small" label="购买数量">
+            <el-input-number v-model="goodsCount"
+	    :min="1" :max="goodsinfo.stock_quantity" size="small" label="购买数量">
             </el-input-number>
           </div>
           <span class="stock-txt">
@@ -41,7 +41,7 @@
         <dd>
           <div class="btn-buy" id="buyButton">
             <button class="buy">立即购买</button>
-            <button class=  "add" @click="addShopcart">加入购物车</button>
+            <button class="add" @click="addShopcart">加入购物车</button>
           </div>
         </dd>
       </dl>
@@ -56,16 +56,26 @@ export default {
   props: ["goodsinfo"],
   data() {
     return {
+      //关联加减按钮的数量
       goodsCount: 1
     };
   },
   methods: {
     //点击的时候加入购物车
+    //通过commit方法累加商品购买记录
     addShopcart() {
-    this.$store.commit('upShopcartTotal',this.goodsCount);
+      this.$store.commit("addShopcartData", {
+        id: this.$route.params.id,
+        val: this.goodsCount
+      });
     },
-    //数量改变
-    handleChange() {}
+
+  },
+  watch: {
+    //url发生变化重置商品的数量
+    $route() {
+      this.goodsCount=1;
+    }
   }
 };
 </script>

@@ -24,27 +24,12 @@ import AppComponent from "./component/App.vue";
 
 //导入路由实例
 import router from './router';
-
+//导入storage配置项
+import storeConfig from './storage';
 
 new Vue({
     el: "#app",
     render: c => c(AppComponent),
     router,
-    store: new Vuex.Store({
-        state: {
-            shopcartTotal: 0
-        },
-        getters: {
-            //计算购物车总数
-            shopcartTotal(state) {
-                return state.shopcartTotal;
-            }
-        },
-        //
-        mutations: {
-            upShopcartTotal(state, num) {
-                state.shopcartTotal += num;
-            }
-        }
-    })
+    store: new Vuex.Store(storeConfig)
 })

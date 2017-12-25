@@ -7,7 +7,8 @@
       </div>
       <div class="conn-box">
         <div class="editor">
-          <textarea v-model="commentContent" id="txtContent" name="txtContent" sucmsg=" " datatype="*10-1000" nullmsg="请填写评论内容！"></textarea>
+          <textarea v-model="commentContent" id="txtContent" name="txtContent" sucmsg=" " 
+	  datatype="*10-1000" nullmsg="请填写评论内容！"></textarea>
           <span class="Validform_checktip"></span>
         </div>
         <div class="subcon">
@@ -18,7 +19,9 @@
     </form>
     <ul id="commentList" class="list-box">
       <!-- 没有评论时候的提示 -->
-      <p v-if="!commentList.length" style="margin:5px 0 15px 69px;line-height:42px;text-align:center;border:1px solid #f7f7f7;">暂无评论，快来抢沙发吧！</p>
+      <p v-if="!commentList.length" style="margin:5px 0 15px 69px;line-height:42px;text-align:center;border:1px solid #f7f7f7;">
+      暂无评论，快来抢沙发吧！
+      </p>
       <!-- 具体评论 -->
       <li v-for="(item,i) in commentList" :key="i">
         <div class="avatar-box">
@@ -36,11 +39,11 @@
     </ul>
     <!--放置页码-->
     <div class="page-box" style="margin:5px 0 0 62px">
-      <div id="pagination" class="digg">
-        <span class="disabled">« 上一页</span>
-        <span class="current">1</span>
-        <span class="disabled">下一页 »</span>
-      </div>
+      <el-pagination 
+      @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="query.pageIndex" :page-sizes="[4, 6, 8, 10]" :page-size="query.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="totalcount" background>
+
+      </el-pagination>
+
     </div>
     <!--/放置页码-->
   </div>
@@ -60,25 +63,42 @@ export default {
       //获取评论列表时候,查询的字符串
       query: {
         pageIndex: 1,
-        pageSize: 5
-      }
+        pageSize: 4
+      },
+      //评论总数
+      totalcount: 0
     };
   },
   methods: {
+    //修改页码
+    handleCurrentChange(page) {
+      this.query.pageIndex = page;
+      this.getCommentList();
+    },
+    //修改每页的数量
+    handleSizeChange(size) {
+      this.query.pageSize = size;
+      this.getCommentList();
+    },
+    //获取评论列
     getCommentList() {
       //加上参数和查询
       this.$http
-        .get(this.$api.commentList + this.tablename + "/" + this.artID, {
-          params: this.query
-        })
-        .then(res => (this.commentList = res.data.message));
+      .get(
+        this.$api.commentList + this.tablename + "/" + this.artID, 
+        {params: this.query}
+        )
+        .then(res => {
+          this.commentList = res.data.message;
+          this.totalcount = res.data.totalcount;
+        });
     },
     //提交评论
     subComment() {
-      this.$http
-        .post(this.$api.comment + this.tablename + "/" + this.artID, {
-          commenttxt: this.commentContent
-        })
+      this.$http.post(
+        this.$api.comment + this.tablename + "/" + this.artID,
+         {commenttxt: this.commentContent}
+         )
         .then(res => {
           //评论成功之后的提示
           this.$message({

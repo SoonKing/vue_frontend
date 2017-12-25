@@ -30,12 +30,13 @@
 
 <script>
 //导入jq放大镜插件,该插件依赖jq所以在源代码中import一下jq
-import '../../../../../lib/imgzoom/js/magnifier.js'
+import '../../../../../lib/imgzoom/js/magnifier.js';
     //导入$,调用插件方法
     import $ from "jquery";
   export default {
     props:['imglist'],
     //该函数只会执行一次,imglist那时候由于是异步请求,还是空数组
+mounted(){},
     //所以使用watch监听imglist的方法,每次变化都要重新初始化放大镜插件
     watch:{
       imglist(){

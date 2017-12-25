@@ -84,7 +84,7 @@ export default {
     getGoodsDetail() {
       this.$http
         .get(this.$api.goodsDetail + this.id)
-        .then(res => (this.goodsDetail = res.data.message));
+        .then(res=> this.goodsDetail = res.data.message);
     }
   },
   //数据加载完毕之后就调用数据的--生命周期函数
@@ -92,7 +92,7 @@ export default {
     this.getGoodsDetail();
   },
 //如果是同一个路由匹配的url变化,name不会触发路由页面的更换,
-//但是$route对象惠济路新的url参数信息,我们来监视$route对象得知页面同一个路由
+//但是$route对象会记录新的url参数信息,我们来监视$route对象得知页面同一个路由
   watch:{
     $route(){
       this.id=this.$route.params.id;
