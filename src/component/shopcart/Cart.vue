@@ -110,7 +110,7 @@
           <div class="cart-foot clearfix">
             <div class="right-box">
               <button class="button" onclick="javascript:location.href='/index.html';">继续购物</button>
-              <button class="submit" onclick="formSubmit(this, '/', '/shopping.html');">立即结算</button>
+              <button class="submit" @click="downdown">立即结算</button>
             </div>
           </div>
           <!--购物车底部-->
@@ -187,6 +187,26 @@ export default {
       this.$store.commit("delShopcartData", { id: id });
       this.goodsList = this.goodsList.filter(v => v.id != id); //数组的filter方法表示留下括号内条件满足的(不删除的)商品
     }
+  },
+  //下订单
+  downdown(){
+    this.$http.get(this.$api.isLogin).then(res=>{
+      //如果登录,就跳转到下一个页面,把勾选的产品ids传递过去,在下页展示
+      if(res.data.code=="logined"){
+        this.$router.push({
+          name:'oa',
+          query:{
+            //遍历所有的商品,找出selected为true,将ids拼接为字符串
+            //filter找出符合掉件的商品,map拿出每个商品的id,最后join拼接成字符串
+            selectedIDS:this.goodsList.filter(v=>v.selected).map(v=>v.id).join(',')
+          }
+        });
+      }
+      //如果没有登录,跳转到登录页面
+      else{
+        this.$router.push({name:'l',query:{nextPage:this.$route.fullpath}});
+      }
+    })
   },
   created() {
     this.getGoodsList();

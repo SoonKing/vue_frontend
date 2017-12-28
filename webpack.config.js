@@ -12,7 +12,9 @@ module.exports = {
         filename: 'bundle.js'
     },
 
-devtool: 'cheap-module-eval-source-map',
+
+    // 注意: 使用了该工具会向打包后的js文件注入大量辅助调试的脚本, 所以该工具在开发时使用, 上线前打包前面不要用
+    devtool: 'cheap-module-eval-source-map',
     plugins: [
 
         // 自动把打包js注入到html

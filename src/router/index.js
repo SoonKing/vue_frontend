@@ -5,7 +5,8 @@ import GoodsDetailComponent from '../component/goods/detail/GoodsDetail.vue';
 import GoodsMoreComponent from '../component/goods/more/GoodsMore.vue';
 import ShopCartComponent from '../component/shopcart/Cart.vue';
 
-//对外导出路由配置对象
+import LoginComponent from '../component/user/Login.vue';
+import OrderAddComponent from '../component/order/OrderAdd.vue';
 
 //路由配置对象
 const routerConfig = [
@@ -15,7 +16,15 @@ const routerConfig = [
     { name: 'g', path: '/goods', component: GoodsHomeComponent },
     { name: 'gd', path: '/goods/detail/:id', component: GoodsDetailComponent },
     { name: 'gm', path: '/goods/more', component: GoodsMoreComponent },
-    { name: 'sc', path: '/shopcart', component: ShopCartComponent }
+
+    // 购物车模块
+    { name: 'sc', path: '/shopcart', component: ShopCartComponent },
+
+    // 账户管理
+    { name: 'l', path: '/login', component: LoginComponent },
+
+    // 订单模块
+    { name: 'oa', path: '/order/add', component: OrderAddComponent },
 ];
 
 //对外导出配置好的路由实例
